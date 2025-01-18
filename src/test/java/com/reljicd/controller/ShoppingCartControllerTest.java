@@ -52,32 +52,36 @@ public class ShoppingCartControllerTest {
     }
 
     @Test
-    public void testAddProductToCart() {
-        // Prepare test data
-        Product product = new Product();
-        when(productService.findById(1L)).thenReturn(Optional.of(product));
+public void testAddProductToCart() {
+    // Prepare test data
+    Product product = new Product();
+    product.setId(1L); // Ensure the ID matches
+    when(productService.findById(1L)).thenReturn(Optional.of(product));
 
-        // Execute
-        ModelAndView modelAndView = shoppingCartController.addProductToCart(1L);
+    // Execute
+    ModelAndView modelAndView = shoppingCartController.addProductToCart(1L);
 
-        // Verify
-        verify(shoppingCartService).addProduct(product);
-        assertEquals("/shoppingCart", modelAndView.getViewName());
-    }
+    // Verify
+    verify(shoppingCartService).addProduct(product);
+    assertEquals("/shoppingCart", modelAndView.getViewName());
+}
+
 
     @Test
-    public void testRemoveProductFromCart() {
-        // Prepare test data
-        Product product = new Product();
-        when(productService.findById(1L)).thenReturn(Optional.of(product));
+public void testRemoveProductFromCart() {
+    // Prepare test data
+    Product product = new Product();
+    product.setId(1L); // Ensure the ID matches
+    when(productService.findById(1L)).thenReturn(Optional.of(product));
 
-        // Execute
-        ModelAndView modelAndView = shoppingCartController.removeProductFromCart(1L);
+    // Execute
+    ModelAndView modelAndView = shoppingCartController.removeProductFromCart(1L);
 
-        // Verify
-        verify(shoppingCartService).removeProduct(product);
-        assertEquals("/shoppingCart", modelAndView.getViewName());
-    }
+    // Verify
+    verify(shoppingCartService).removeProduct(product);
+    assertEquals("/shoppingCart", modelAndView.getViewName());
+}
+
 
     @Test
     public void testCheckoutSuccess() throws NotEnoughProductsInStockException {
